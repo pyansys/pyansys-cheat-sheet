@@ -16,6 +16,7 @@ if "%1" == "pydynamicreporting_cheat_sheet" goto pydynamicreporting_cheat_sheet
 if "%1" == "pyensight_cheat_sheet" goto pyensight_cheat_sheet
 if "%1" == "pydpf-post_cheat_sheet" goto pydpf-post_cheat_sheet
 if "%1" == "pymotorcad_cheat_sheet" goto pymotorcad_cheat_sheet
+if "%1" == "pyworkbench_cheat_sheet" goto pyworkbench_cheat_sheet
 if "%1" == "clean" goto clean
 if "%1" == "help" goto help
 if "%1" == "" goto help
@@ -119,6 +120,16 @@ exit /b 1)
 Echo "pdf generated!"
 goto end
 
+:pyworkbench_cheat_sheet
+set SCRIPT_PATH=cheat_sheets/pyworkbench_cheat_sheet/pyworkbench_script.py
+CALL :run_script
+pdflatex -output-directory=%BUILDDIR% cheat_sheets/pyworkbench_cheat_sheet/pyworkbench_cheat_sheet.tex --interaction=nonstopmode
+if NOT EXIST %BUILDDIR%/pyworkbench_cheat_sheet.pdf(
+Echo "no pdf generated!"
+exit /b 1)
+Echo "pdf generated!"
+goto end
+
 :all
 CALL :pymapdl_cheat_sheet 
 CALL :pyaedt_API_cheat_sheet
@@ -131,6 +142,7 @@ CALL :pydynamicreporting_cheat_sheet
 CALL :pyensight_cheat_sheet
 CALL :pydpf-post_cheat_sheet
 CALL :pymotorcad_cheat_sheet
+CALL :pyworkbench_cheat_sheet
 goto end
 
 :run_script
@@ -160,6 +172,7 @@ echo   pymechanical_cheat_sheet:   Build the pymechanical cheatsheet
 echo   pydynamicreporting_cheat_sheet:   Build the pydynamicreporting cheatsheet
 echo   pyensight_cheat_sheet:   Build the pydynamicreporting cheatsheet
 echo   pymotorcad_cheat_sheat:    Build the pymotorcad cheatsheet
+echo   pyworkbench_cheat_sheat:    Build the pyworkbench cheatsheet
 
 :end
 popd
