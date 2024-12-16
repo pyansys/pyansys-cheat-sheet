@@ -15,7 +15,9 @@ host = "server_machine_name_or_ip"
 username = "your_username_on_server_machine"
 password = "your_password_on_server_machine"
 
-wb = launch_workbench(host=host, username=username, password=password)
+wb = launch_workbench(
+    host=host, username=username, password=password
+)
 # BREAK BLOCK
 wbjn_template = """
 import os
@@ -32,14 +34,14 @@ Unarchive(
     """
 wb.run_script_string(wbjn_template)
 # BREAK BLOCK
-wb.run_script_file('project_workflow.wbjn')
+wb.run_script_file("project_workflow.wbjn")
 # BREAK BLOCK
 import json
 
 messages = [m.Summary for m in GetMessages()]
 wb_script_result = json.dumps(messages)
 # BREAK BLOCK
-wb.run_script_file('project_workflow.wbjn', log_level='info')
+wb.run_script_file("project_workflow.wbjn", log_level="info")
 # BREAK BLOCK
 wb.upload_file("model?.prt", "*.agdb", "/path/to/some/file")
 # BREAK BLOCK
@@ -76,7 +78,9 @@ wb_script_result=json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)"
 """
 )
 server_port = wb.start_mechanical_server(system_name=sys_name)
-mechanical = connect_to_mechanical(ip="localhost", port=server_port)
+mechanical = connect_to_mechanical(
+    ip="localhost", port=server_port
+)
 # BREAK BLOCK
 import ansys.fluent.core as pyfluent
 
@@ -86,7 +90,9 @@ wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Na
 """
 )
 server_info_file = wb.start_fluent_server(system_name=sys_name)
-fluent = pyfluent.connect_to_fluent(server_info_file_name=server_info_file)
+fluent = pyfluent.connect_to_fluent(
+    server_info_file_name=server_info_file
+)
 # BREAK BLOCK
 from ansys.sherlock.core import launcher as pysherlock
 
