@@ -46,13 +46,11 @@
 \section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Local connection to a Workbench Server}
 Execute the steps below to link PyWorkbench with a local Ansys Workbench session:
 
-\begin{document}
 \begin{itemize}
 \item Initiate Ansys Workbench  
 \item Input StartServer() in the Workbench Command Window 
 \item Utilize the given port number to link PyWorkbench with the server
 \end{itemize}    
-\end{document}
 
 \pythoncode{scripts/generated_scripts/pyworkbench_script_0.py}
 
@@ -74,12 +72,10 @@ This script initiates a server on a remote Windows device using appropriate user
 
 These methods can be utilized to execute IronPython-based Workbench scripts containing commands or queries, with the help of PyWorkbench:
 
-\begin{document}
 \begin{itemize}
 \item \texttt{run_script_string()}: Executes a script that is included within the provided string
 \item \texttt{run_script_file()}: Executes a script file in the client's working directory
 \end{itemize}    
-\end{document}
 
 Using \texttt{run_script_string()} method:
 \pythoncode{scripts/generated_scripts/pyworkbench_script_4.py}
