@@ -1,0 +1,181 @@
+\documentclass[9pt,landscape]{article}
+\usepackage{{./../static/style}}
+\pdfinfo{
+  /Title (PyWorkbench cheat sheet)
+  /Creator (TeX)
+  /Producer (pdfTeX 1.40.0)
+  /Author (Ansys)
+  /Subject (PyWorkbench)
+  /Keywords (PyAnsys, PyWorkbench, Workbench, cheat sheet, template)}
+
+\begin{document}
+\raggedright
+\footnotesize
+
+% Add the title of cheat sheet here
+% ----------------------------------------
+\begin{center}
+     \Huge{\textbf{PyWorkbench cheat sheet}} \\
+\end{center}
+
+\begin{center}
+  \small{\textbf{Version: 0.5 (stable) - API is subject to change}} \\
+\end{center}
+
+\AddToShipoutPicture*
+  {\put(670,577.5){\includegraphics[height = 1.2cm]{ansys.png}}}
+\AddToShipoutPictureBG*{\includegraphics[width=\paperwidth]{bground.png}}
+\vspace{-0.15cm}
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{2pt}}
+
+\begin{multicols}{3}
+\setlength{\premulticols}{1pt}
+\setlength{\postmulticols}{1pt}
+\setlength{\multicolsep}{1pt}
+\setlength{\columnsep}{2pt}
+
+% session starts here. 
+% First colomn
+% --------------------------------------------------------------------------------
+\vfill
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} # Connect PyWorkbench to Ansys Workbench from Python}
+
+% \vspace{5mm} %5mm vertical space
+% {\color{orange} \rule{\linewidth}{0.1mm}}
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Local connection to a Workbench Server}
+Execute the steps below to link PyWorkbench with a local Ansys Workbench session:
+
+\begin{document}
+\begin{itemize}
+\item Initiate Ansys Workbench  
+\item Input StartServer() in the Workbench Command Window 
+\item Utilize the given port number to link PyWorkbench with the server
+\end{itemize}    
+\end{document}
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_0.py}
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Remote connection to a Workbench Server}
+Execute the steps below to link PyWorkbench with a local Ansys Workbench session:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_1.py}
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Launch Workbench Server and Start a Client}
+You can initiate a Workbench server and activate a client through a Python script on the client-side.
+
+This script initiates a server on a local Windows-based system:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_2.py}
+
+This script initiates a server on a remote Windows device using appropriate user authentication:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_3.py}
+
+% row 2 col 1
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Execute scripts on the Workbench server}
+
+These methods can be utilized to execute IronPython-based Workbench scripts containing commands or queries, with the help of PyWorkbench:
+
+\begin{document}
+\begin{itemize}
+\item \texttt{run_script_string()}: Executes a script that is included within the provided string
+\item \texttt{run_script_file()}: Executes a script file in the client's working directory
+\end{itemize}    
+\end{document}
+
+Using \texttt{run_script_string()} method:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_4.py}
+
+Using \texttt{run_script_file()} method:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_5.py}
+
+You have the ability to assign any output that needs to be returned from these methods to the global variable \texttt{wb_script_result} in the script, as a JSON string.
+Workbench script returns all message summaries from the Workbench session:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_6.py}
+
+Below script while execution will display \texttt{info}, \texttt{warning}, and \texttt{error} (default) levels in the logger.
+\pythoncode{scripts/generated_scripts/pyworkbench_script_7.py}
+
+% Second column
+% --------------------------------------------------------------------------------
+% row 1 col 2
+
+\vfill
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Upload and download files}
+
+Using the \texttt{upload_file()} and \texttt{download_file()} methods, you have the ability to transfer data files to the server (upload) and retrieve them from the server (download).
+You can use the GetServerWorkingDirectory() query in the scripts that execute on the server to retrieve the server's operating directory.
+
+This script uploads all *.prt files and *.agdb files in the working directory, and another file from a different directory, from the client to the server:
+\pythoncode{scripts/generated_scripts/pyworkbench_script_8.py}
+
+\vspace{2mm} %5mm vertical space
+
+This server-side script loads a geometry file into a new Workbench system from the server's directory:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_9.py}
+
+This server-side script transfers a Mechanical solver output file to the server's directory from Workbench:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_10.py}
+
+This client script retrieves all .out files from the server's working directory:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_11.py}
+
+Using the \texttt{download_project_archive()} function you can save your current Workbench project on the server, archive it, and then download the archived project to the client:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_12.py}
+
+
+% Third column
+% --------------------------------------------------------------------------------
+% \vfill
+% row 1 col 3
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} Initiate additional PyAnsys services for systems within a Workbench project}
+% \vspace{5mm} %5mm vertical space
+% {\color{orange} \rule{\linewidth}{0.1mm}}
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} PyMechanical}
+
+In a Workbench project, you can operate and link the PyMechanical service from the same client machine. 
+This script creates a mechanical system server-side, then starts the PyMechanical service and client:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_13.py}
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} PyFluent}
+
+This script initiates the PyFluent service along with the client for a Fluent system that was developed in Workbench:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_14.py}
+
+\section{\includegraphics[height=\fontcharht\font`\S]{slash.png} PySherlock}
+
+This code activates the PySherlock service and its client for a Sherlock system that was established in Workbench:
+
+\pythoncode{scripts/generated_scripts/pyworkbench_script_15.py}
+
+% Add subsection
+% This section includes useful links to the documentation.
+% Examples: installation, API reference, commands, examples.
+% Replace 'name of link' with appropriate display text.
+
+\subsection{References from PyWorkbench documentation}
+\begin{multicols}{2}
+\begin{itemize}
+    \item \href{https://workbench.docs.pyansys.com/version/stable/getting-started.html}{\color{blue}{Getting started}}
+    \item \href{https://workbench.docs.pyansys.com/version/stable/user-guide.html}{\color{blue}{User guide}}
+    \item \href{https://workbench.docs.pyansys.com/version/stable/examples.html}{\color{blue}{Examples}}
+    \item \href{https://workbench.docs.pyansys.com/version/stable/api/index.html}{\color{blue}{API reference}}
+\end{itemize}
+\end{multicols}
+\end{multicols}
+
+% Footer session of the latex with link to documentation and GitHub page
+\vspace{-0.15cm}
+\noindent\makebox[\linewidth]{\rule{\paperwidth}{4pt}}
+\begin{center}
+Getting started with PyWorkbench \includegraphics[height=\fontcharht\font`\S]{slash.png} \href{https://github.com/ansys/pyworkbench}{\color{blue}{pyworkbench on GitHub}}}
+Visit \includegraphics[height=\fontcharht\font`\S]{slash.png} \href{https://workbench.docs.pyansys.com/version/stable/}{\color{blue}{workbench.docs.pyansys.com}}} 
+\end{center}
+\end{document}
