@@ -74,10 +74,13 @@ from ansys.mechanical.core import connect_to_mechanical
 
 sys_name = wb.run_script_string(
     r"""import json
-wb_script_result=json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)").CreateSystem().Name)
+wb_script_result =
+    json.dumps(GetTemplate(TemplateName="Static Structural (ANSYS)").CreateSystem().Name)
 """
 )
-server_port = wb.start_mechanical_server(system_name=sys_name)
+server_port = wb.start_mechanical_server(
+    system_name=sys_name
+)
 mechanical = connect_to_mechanical(
     ip="localhost", port=server_port
 )
@@ -86,10 +89,13 @@ import ansys.fluent.core as pyfluent
 
 sys_name = wb.run_script_string(
     r"""import json
-wb_script_result=json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
+wb_script_result =
+    json.dumps(GetTemplate(TemplateName="FLUENT").CreateSystem().Name)
 """
 )
-server_info_file = wb.start_fluent_server(system_name=sys_name)
+server_info_file = wb.start_fluent_server(
+    system_name=sys_name
+)
 fluent = pyfluent.connect_to_fluent(
     server_info_file_name=server_info_file
 )
@@ -98,9 +104,14 @@ from ansys.sherlock.core import launcher as pysherlock
 
 sys_name = wb.run_script_string(
     r"""import json
-wb_script_result=json.dumps(GetTemplate(TemplateName="SherlockPre").CreateSystem().Name)
+wb_script_result =
+    json.dumps(GetTemplate(TemplateName="SherlockPre").CreateSystem().Name)
 """
 )
-server_port = wb.start_sherlock_server(system_name=sys_name)
-sherlock = pysherlock.connect_grpc_channel(port=server_port)
+server_port = wb.start_sherlock_server(
+    system_name=sys_name
+)
+sherlock = pysherlock.connect_grpc_channel(
+    port=server_port
+)
 # BREAK BLOCK
